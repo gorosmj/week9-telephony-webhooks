@@ -28,3 +28,18 @@ This project demonstrates a secure asynchronous webhook workflow using a simulat
 
 ## Limitations
 The initial duplicate-event store is in memory and resets when the server restarts. Persistent storage and full route integration tests remain future work.
+
+sequenceDiagram
+    participant Caller as Caller Phone
+    participant Twilio as Twilio Gateway
+    participant API as Next.js API Route
+    participant Engine as TwiML Engine
+
+    Caller->>Twilio: Initiates phone call
+    Twilio->>API: POST webhook with call details
+    API->>API: Validate signature and required fields
+    API->>API: Check duplicate CallSid
+    API->>API: Log redacted event details
+    API-->>Twilio: Return TwiML XML
+    Twilio->>Engine: Process TwiML instructions
+    Engine-->>Caller: Play confirmation message

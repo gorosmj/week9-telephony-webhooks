@@ -3,7 +3,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 
 test("actual Twilio route rejects unsupported content types", async () => {
-  const { POST } = await import("../app/api/webhooks/twilio/route.js");
+  const { POST } = await import("../../../app/api/webhooks/twilio/route.js");
 
   const request = new Request("https://example.com/api/webhooks/twilio", {
     method: "POST",
@@ -17,7 +17,7 @@ test("actual Twilio route rejects unsupported content types", async () => {
 });
 
 test("actual Twilio route rejects oversized requests", async () => {
-  const { POST } = await import("../app/api/webhooks/twilio/route.js");
+  const { POST } = await import("../../../app/api/webhooks/twilio/route.js");
 
   const request = new Request("https://example.com/api/webhooks/twilio", {
     method: "POST",
@@ -33,7 +33,7 @@ test("actual Twilio route rejects oversized requests", async () => {
 });
 
 test("actual Twilio route rejects missing webhook configuration", async () => {
-  const { POST } = await import("../app/api/webhooks/twilio/route.js");
+  const { POST } = await import("../../../app/api/webhooks/twilio/route.js");
 
   delete process.env.TWILIO_AUTH_TOKEN;
   delete process.env.TWILIO_CALLBACK_URL;
@@ -52,7 +52,7 @@ test("actual Twilio route rejects missing webhook configuration", async () => {
 });
 
 test("actual Twilio route rejects an invalid signature", async () => {
-  const { POST } = await import("../app/api/webhooks/twilio/route.js");
+  const { POST } = await import("../../../app/api/webhooks/twilio/route.js");
 
   process.env.TWILIO_AUTH_TOKEN = "test-auth-token";
   process.env.TWILIO_CALLBACK_URL =

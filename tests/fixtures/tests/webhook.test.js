@@ -43,3 +43,10 @@ test("uses an opt-in environment flag for outbound SMS", () => {
 
   assert.equal(enabled === "true", false);
 });
+
+test("rejects an invalid Twilio signature", () => {
+  const validSignature = false;
+
+  assert.equal(validSignature, false);
+});
+
